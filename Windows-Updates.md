@@ -14,7 +14,14 @@ Make sure to fill the `$servers` variable first!
   - `$servers = Get-ADComputer -Filter { Name -like '*HV*' } | Select-Object -ExpandProperty Name`
   - `$servers = Get-ADComputer -Filter { Name -like 'RDS-*' } | Select-Object -ExpandProperty Name`
 
-Also, all commands return their result into `$result` variable, to enable further analysis + filtering after the command was run
+Also, all commands return their result into `$result` variable, to enable further analysis + filtering after the command was run!
+
+Further Docs:
+
+- `Get-Help Get-WindowsUpdate`
+- `Get-Help Get-WindowsUpdate -examples`
+- [mgajda83/PSWindowsUpdate: Usage and Examples](https://github.com/mgajda83/PSWindowsUpdate?tab=readme-ov-file#Usage-and-Examples)
+- [cfebs/windows_update_powershell.md](https://gist.github.com/cfebs/c9d83c2480a716f6d8571fb6cc80fd59)
 
 ## PSWindowsUpdate Installation
 
