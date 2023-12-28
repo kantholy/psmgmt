@@ -35,17 +35,22 @@ Invoke-Command -ComputerName $servers -ScriptBlock {
 
 ## Install Update
 
+### Automatic Reboot
+
 ```powershell
-# CAUTION: Autopilot active: 
-# CAUTION: this will Reboot the Computer when finished
+# CAUTION: Autopilot active! this will reboot the Computer when finished
 Invoke-Command -ComputerName $servers -ScriptBlock {
     Install-WindowsUpdate -AcceptAll -AutoReboot
 } -OutVariable result
+```
 
-###############################################################################
-# With scheduled reboot at specified time. 
-# please adjust accordingly to your needs and maintenance window
-# for example: today @ 22:20
+### Scheduled Reboot
+
+- With scheduled reboot at specified time.
+- please adjust accordingly to your needs and maintenance window
+- for example: today @ 22:20
+
+```powershell
 $reboot = Get-Date -Hour 22 -Minute 20 -Second 00
 
 Invoke-Command -ComputerName $servers -ScriptBlock {
@@ -55,8 +60,10 @@ Invoke-Command -ComputerName $servers -ScriptBlock {
 
 ## Show History
 
+- show updates installed in the last 3 month
+
 ```powershell
-# show updates installed in the last 3 month
+
 $since = (Get-Date -Day 1 -Hour 0 -Minute 0 -Second 0).AddMonths(-3)
 
 Invoke-Command -ComputerName $servers -ScriptBlock {
@@ -70,5 +77,5 @@ Invoke-Command -ComputerName $servers -ScriptBlock {
 $since = (Get-Date -Day 1 -Hour 0 -Minute 0 -Second 0).AddMonths(-3)
 Invoke-Command -ComputerName $servers -ScriptBlock {
     Get-WUHistory -MaxDate $Using:since
-} | Where-Object Result -ne "Succeeded" -Outvariable $result
+} | Where-Object Result -ne "Succeeded" -Outvariable result
 ```
