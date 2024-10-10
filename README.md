@@ -12,11 +12,9 @@ This repo is my digital brain extension, the purpose is to collect and share som
 >
 > **You have been warned.**
 
-
 ### 7-zip
 
 ```powershell
-#Requires -RunAsAdministrator
 $installer = Join-Path $env:TEMP "installer.ps1"
 Invoke-WebRequest https://raw.githubusercontent.com/kantholy/psmgmt/refs/heads/master/apps/7zip.ps1 -OutFile $installer
 . $installer
@@ -30,7 +28,6 @@ Invoke-WebRequest https://raw.githubusercontent.com/kantholy/psmgmt/refs/heads/m
 ### Firefox
 
 ```powershell
-#Requires -RunAsAdministrator
 $installer = Join-Path $env:TEMP "installer.ps1"
 Invoke-WebRequest https://raw.githubusercontent.com/kantholy/psmgmt/refs/heads/master/apps/firefox.ps1 -OutFile $installer
 . $installer
