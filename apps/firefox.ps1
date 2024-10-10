@@ -113,7 +113,7 @@ $params = @(
     "DESKTOP_SHORTCUT=false", 
     "OPTIONAL_EXTENSIONS=false", 
     "INSTALL_MAINTENANCE_SERVICE=false", 
-    "PRIVATE_BROWSING_SHORTCUT=false",
+    "PRIVATE_BROWSING_SHORTCUT=false"
 )
 
 if($autoupdate) {
