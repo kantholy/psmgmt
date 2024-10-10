@@ -38,4 +38,5 @@ Invoke-WebRequest https://raw.githubusercontent.com/kantholy/psmgmt/refs/heads/m
 > [!NOTE] 
 > available flags:
 > `-updateonly` only updates firefox if installed already
+>
 > `-autoupdate:$false` prevents the installation of the firefox maintenance service
