@@ -62,7 +62,7 @@ if ($installedVersion -eq $onlineVersion) {
     Write-Host "$appName $installedVersion is installed and up to date!" -ForegroundColor Green
     exit 0
 } elseif ($installedVersion -gt $onlineVersion) {
-    Write-Host "Your installed $appName version is higher than the available version -- skipping." -ForegroundColor Yellow
+    Write-Host "SKIPPED: Your installed $appName version is higher than the available version." -ForegroundColor Yellow
     exit 0
 }
 

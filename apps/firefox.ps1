@@ -5,6 +5,8 @@ param(
     [switch]$autoupdate = $true
 )
 
+$appName = "Mozilla Firefox"
+
 ###############################################################################
 #region Functions
 function Get-OnlineVersion {
@@ -26,12 +28,12 @@ function Get-MsiDownloadLink {
         $url = "https://download.mozilla.org/?product=firefox-esr-msi-latest-ssl&os=win64&lang=de"
         if ($PSVersionTable.PSVersion -gt 5) {
             $req = Invoke-WebRequest -Uri $url -MaximumRedirection 0 -SkipHttpErrorCheck -ErrorAction:SilentlyContinue
+            $msiUrl = $req.Headers.Location | Select-Object -First 1
         } else {
             $req = Invoke-WebRequest -Uri $url -MaximumRedirection 0 -ErrorAction:SilentlyContinue
+            $msiUrl = $req.Headers.Location
         }
         
-        $msiUrl = $req.Headers.Location
-
         $fileName = [System.IO.Path]::GetFileName([system.uri]::UnescapeDataString($msiUrl))
 
         $version = $fileName -replace "[^\d\.]", ""
@@ -68,21 +70,21 @@ function Get-InstalledVersion {
 $installedVersion = Get-InstalledVersion
 
 if (-not $installedVersion -and $updateonly) {
-    Write-Host "Firefox is not yet installed and script is set to -updateonly -- exiting now." -ForegroundColor Yellow
+    Write-Host "$appName is not yet installed and script is set to -updateonly -- exiting now." -ForegroundColor Yellow
     exit 0
 }
 
 $onlineVersion = Get-OnlineVersion
 if (-not $onlineVersion) {
-    Write-Host "Unable to fetch Firefox Version -- exiting now." -ForegroundColor Red
+    Write-Host "Unable to fetch $appName Version -- exiting now." -ForegroundColor Red
     exit 1
 }
 
 if ($installedVersion -eq $onlineVersion) {
-    Write-Host "Firefox is installed and up to date!" -ForegroundColor Green
+    Write-Host "$appName is installed and up to date!" -ForegroundColor Green
     exit 0
 } elseif ($installedVersion -gt $onlineVersion) {
-    Write-Host "Your installed Firefox version is higher than the available version -- skipping." -ForegroundColor Yellow
+    Write-Host "SKIPPED: Your installed $appName version is higher than the available version." -ForegroundColor Yellow
     exit 0
 }
 
@@ -91,7 +93,7 @@ if ($installedVersion -eq $onlineVersion) {
 ###############################################################################
 #region Download and Install
 
-Write-Host "Downloading Firefox..." -ForegroundColor Cyan
+Write-Host "Downloading $appName $onlineVersion..." -ForegroundColor Cyan
 
 
 $msi = Get-MsiDownloadLink
@@ -104,9 +106,9 @@ if(-not $msi) {
 $tmpFolder = [System.IO.Path]::GetTempPath()
 $targetFile = Join-Path -Path $tmpFolder -ChildPath $msi.FileName
 
-Start-BitsTransfer -Source $msi.Url -Destination $targetFile -DisplayName $msi.Url -Description "to $targetFile"
+Start-BitsTransfer -Source $msi.Url -Destination $targetFile -DisplayName $msi.FileName -Description "to $targetFile"
 
-Write-Host "Download finished, starting Installation: $($msi.FileName)" -ForegroundColor Cyan
+Write-Host "Installing..." -ForegroundColor Cyan
 
 
 # see https://support.mozilla.org/en-US/kb/deploy-firefox-msi-installers#w_configuration-options
