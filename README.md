@@ -24,7 +24,8 @@ Invoke-WebRequest https://raw.githubusercontent.com/kantholy/psmgmt/refs/heads/m
 
 > [!NOTE] 
 > available flags:
-> `-updateonly` only updates 7zip if installed already
+>
+> * `-updateonly` only updates 7zip if installed already
 
 ### Firefox
 
@@ -37,6 +38,6 @@ Invoke-WebRequest https://raw.githubusercontent.com/kantholy/psmgmt/refs/heads/m
 
 > [!NOTE] 
 > available flags:
-> `-updateonly` only updates firefox if installed already
 >
-> `-autoupdate:$false` prevents the installation of the firefox maintenance service
+> * `-updateonly` only updates firefox if installed already
+> * `-autoupdate:$false` prevents the installation of the firefox maintenance service
