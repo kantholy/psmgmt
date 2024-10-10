@@ -86,3 +86,24 @@ Invoke-Command -ComputerName $servers -ScriptBlock {
     Get-WUHistory -MaxDate $Using:since
 } | Where-Object Result -ne "Succeeded" -Outvariable result
 ```
+
+
+## Interactive Installation
+
+```powershell
+# local machine
+$updates = Start-WUScan
+Install-WUUpdates -Updates $updates
+
+
+# remote machine
+$server = "srv01"
+
+$updates = Invoke-Command -ComputerName $server -ScriptBlock { Start-WuScan }
+#list updates first
+$updates | Format-Table
+
+# install them
+$cim = New-CimSession -ComputerName $server
+Install-WUUpdates -CimSession $cim -Updates $updates
+```
