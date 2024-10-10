@@ -1,5 +1,4 @@
-﻿#Requires -RunAsAdministrator
-#Requires -Version 5.1
+﻿#Requires -Version 5.1
 
 param(
     [switch]$updateonly = $false
@@ -96,7 +95,7 @@ $params = @(
     "/norestart"
 )
 
-$proc = Start-Process -FilePath "msiexec.exe"-ArgumentList $params -PassThru -Wait
+$proc = Start-Process -FilePath "msiexec.exe"-ArgumentList $params -Verb runAs-PassThru -Wait
 
 if ($proc.ExitCode -eq 0) {
     Write-Host "Installation successful!" -ForegroundColor Green

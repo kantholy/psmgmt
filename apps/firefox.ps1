@@ -1,4 +1,5 @@
 ﻿#Requires -Version 5.1
+
 param(
     [switch]$updateonly = $false,
     [switch]$autoupdate = $true
@@ -125,7 +126,7 @@ if($autoupdate) {
     $params += "INSTALL_MAINTENANCE_SERVICE=false"
 }
 
-$proc = Start-Process -FilePath "msiexec.exe" -ArgumentList $params -PassThru -Wait
+$proc = Start-Process -FilePath "msiexec.exe" -ArgumentList $params -Verb runAs -PassThru -Wait
 
 if ($proc.ExitCode -eq 0) {
     Write-Host "Installation successful!" -ForegroundColor Green

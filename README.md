@@ -7,10 +7,10 @@ This repo is my digital brain extension, the purpose is to collect and share som
 ## App Installer
 
 > [!CAUTION]
-> Please do not run these commands without checking the files first
+> Please do not run these commands without checking the files first<br>
 > Trusting random strangers of the internet is the worst idea you can do!
 >
-> You have been warned.
+> **You have been warned.**
 
 
 ### 7-zip
