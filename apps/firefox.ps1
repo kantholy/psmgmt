@@ -114,8 +114,11 @@ $params = @(
     "OPTIONAL_EXTENSIONS=false", 
     "INSTALL_MAINTENANCE_SERVICE=false", 
     "PRIVATE_BROWSING_SHORTCUT=false",
-    "INSTALL_MAINTENANCE_SERVICE=false"
 )
+
+if($autoupdate) {
+    $params += "INSTALL_MAINTENANCE_SERVICE=false"
+}
 
 $proc = Start-Process -FilePath "msiexec.exe" -ArgumentList $params -PassThru -Wait
 
