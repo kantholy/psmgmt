@@ -1,7 +1,7 @@
 ﻿#Requires -Version 5.1
 param(
     [switch]$updateonly = $false,
-    [switch]$autoupdate = $true,
+    [switch]$autoupdate = $true
 )
 
 ###############################################################################
