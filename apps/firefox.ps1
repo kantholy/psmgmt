@@ -23,7 +23,12 @@ function Get-OnlineVersion {
 function Get-MsiDownloadLink {
     try {
         $url = "https://download.mozilla.org/?product=firefox-esr-msi-latest-ssl&os=win64&lang=de"
-        $req = Invoke-WebRequest -Uri $url -MaximumRedirection 0 -ErrorAction:SilentlyContinue
+        if ($PSVersionTable.PSVersion -gt 5) {
+            $req = Invoke-WebRequest -Uri $url -MaximumRedirection 0 -SkipHttpErrorCheck -ErrorAction:SilentlyContinue
+        } else {
+            $req = Invoke-WebRequest -Uri $url -MaximumRedirection 0 -ErrorAction:SilentlyContinue
+        }
+        
         $msiUrl = $req.Headers.Location
 
         $fileName = [System.IO.Path]::GetFileName([system.uri]::UnescapeDataString($msiUrl))
