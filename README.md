@@ -28,6 +28,14 @@ Invoke-WebRequest https://raw.githubusercontent.com/kantholy/psmgmt/refs/heads/m
 . $installer
 ```
 
+### PowerShell
+
+```powershell
+$installer = Join-Path $env:TEMP "installer.ps1"
+Invoke-WebRequest https://raw.githubusercontent.com/kantholy/psmgmt/refs/heads/master/apps/powershell.ps1 -OutFile $installer
+. $installer
+```
+
 > [!NOTE] 
 > available flags:
 >
