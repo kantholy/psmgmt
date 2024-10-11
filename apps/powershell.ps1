@@ -30,7 +30,16 @@ function Get-DownloadLink {
 }
 
 function Get-InstalledVersion {
-    return $PSVersionTable.PSVersion
+    # read from registry uninstall key
+    $key = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"
+    $version = Get-ChildItem $key | Get-ItemProperty | Where-Object { $_.DisplayName -like "PowerShell*" } | Select-Object -First 1 -ExpandProperty DisplayVersion
+
+    if (-not $version) {
+        return $null
+    }
+
+    $bits = $version.Split(".")
+    return [Version]::new($bits[0], $bits[1], $bits[2], 0)
 }
 
 #endregion
