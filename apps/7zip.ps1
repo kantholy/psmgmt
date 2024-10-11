@@ -95,7 +95,7 @@ $params = @(
     "/norestart"
 )
 
-$proc = Start-Process -FilePath "msiexec.exe"-ArgumentList $params -Verb runAs-PassThru -Wait
+$proc = Start-Process -FilePath "msiexec.exe"-ArgumentList $params -PassThru -Wait
 
 if ($proc.ExitCode -eq 0) {
     Write-Host "Installation successful!" -ForegroundColor Green
