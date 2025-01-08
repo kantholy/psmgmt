@@ -31,6 +31,10 @@ Invoke-WebRequest https://raw.githubusercontent.com/kantholy/psmgmt/refs/heads/m
 ### PowerShell
 
 ```powershell
+# official Microsoft OneLine installer:
+iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI"
+
+# custom:
 $installer = Join-Path $env:TEMP "installer.ps1"
 Invoke-WebRequest https://raw.githubusercontent.com/kantholy/psmgmt/refs/heads/master/apps/powershell.ps1 -OutFile $installer
 . $installer
